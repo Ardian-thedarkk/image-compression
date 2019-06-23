@@ -153,7 +153,7 @@ class runlength_compress:
         # Write byte array to output
         with open(self.output_path, 'wb') as f:
             pickle.dump(b, f)
-            print("Completed !!!\tRatio: %.2f\tTime: %.2f(s)\t\tSaved as: \'%s\'" %(self.ratio, self.time, self.output_path))
+            print("Input: \'%s\'\tOutput: \'%s\'\tTime: %.2f(s)\tRatio: %.2f" %(self.image_path, self.output_path, self.time, self.ratio))
 
 
 def main(argv):

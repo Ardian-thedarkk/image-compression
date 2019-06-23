@@ -132,8 +132,7 @@ class runlength_decompress:
 
     def write(self):
         cv2.imwrite(self.output_path, self.image)
-        print("Completed !!!\tTime: %.2f(s)\t\tSaved as \'%s\'"%(self.time,self.output_path))
-
+        print("Input: \'%s\' \tOutput: \'%s\' \tTime: %2.f(s)"%(self.input_path, self.output_path, self.time))
 
 def main(argv):
     compressed, image_path = argv
