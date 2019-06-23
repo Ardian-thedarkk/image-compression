@@ -78,9 +78,13 @@ class arithmetic_compress:
         # Encode each elements in array image
         # and save it into string_path
         leng_array = len(self.array)
+        t = leng_array * 1.0 / 100
+        percent = 0
         for i,elem in enumerate(self.array):
-            sys.stdout.write("Processing:\t%d\t/\t%d\r"%(i+1, leng_array))
-            sys.stdout.flush()
+            if i * 100.0/ leng_array > percent:
+                percent += 1
+                sys.stdout.write("Processing:\t{} %\r".format(percent))
+                sys.stdout.flush()
             model.encode(freq, elem)
         model.finish()
         print('')

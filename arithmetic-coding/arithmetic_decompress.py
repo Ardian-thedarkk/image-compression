@@ -30,7 +30,7 @@ class arithmetic_decompress:
         self.shape = None
 
         # time processing
-        self.time = 0
+        self.time = time.time()
 
         self.read()
 
@@ -103,7 +103,6 @@ class arithmetic_decompress:
 
 
     def decompress(self, numbits):
-        t = time.time()
 
         # push eof into dict
         if 256 not in self.freq_dict:
@@ -120,9 +119,13 @@ class arithmetic_decompress:
         model = decoder(numbits = 32, bitin = bitin)
         
         i = 0
+        percent = 0
         while True:
-            sys.stdout.write("Processing:\t%d\t/\t%d\r"%(i+1, total))
-            sys.stdout.flush()
+            if i * 100.0 / total > percent:
+                percent += 1
+                sys.stdout.write("Processing:\t{} %\r".format(percent))
+                sys.stdout.flush()
+
             i += 1
             symbol = model.decode(freq)
             if symbol == 256:
@@ -130,13 +133,11 @@ class arithmetic_decompress:
         print('')
         model.finish()
         self.array = model.array
-
-        self.time = time.time() - t
-
         self.toimage()
 
     def write(self):
         cv2.imwrite(self.output_path, self.image)
+        self.time = time.time() - self.time
         print("Input: \'%s\' \tOutput: \'%s\' \tTime: %2.f(s)"%(self.encoded_path, self.output_path, self.time))
 
 
