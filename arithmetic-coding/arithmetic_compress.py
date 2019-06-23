@@ -150,7 +150,7 @@ class arithmetic_compress:
         # save byte array to output
         with open(self.output_path, 'wb') as f:
             pickle.dump(b, f)
-            print("Input:\'%s\'\tOutput:\'%s\'\tTime: %.2f(s)\tRatio: %2.f" %(self.image_path, self.output_path, self.time, self.ratio))
+            print("Input: \'%s\'\tOutput: \'%s\'\tTime: %.2f(s)\tRatio: %.2f" %(self.image_path, self.output_path, self.time, self.ratio))
             
 
 def main(argv):

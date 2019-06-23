@@ -127,6 +127,7 @@ class arithmetic_decompress:
             symbol = model.decode(freq)
             if symbol == 256:
                 break
+        print('')
         model.finish()
         self.array = model.array
 
@@ -136,7 +137,7 @@ class arithmetic_decompress:
 
     def write(self):
         cv2.imwrite(self.output_path, self.image)
-        print("Input:\'%s\'\tOutput:\'%s\'\tTime: %2.f"%(self.encoded_path, self.output_path, self.time))
+        print("Input: \'%s\' \tOutput: \'%s\' \tTime: %2.f(s)"%(self.encoded_path, self.output_path, self.time))
 
 
 def main(argv):
