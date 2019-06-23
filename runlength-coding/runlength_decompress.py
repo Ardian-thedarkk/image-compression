@@ -24,6 +24,9 @@ class runlength_decompress:
         # symbols and runlength_array
         self.symbols = []
         self.run_length = []
+        
+        # time processing
+        self.time = time.time()
 
         self.read()
         self.reconstruct()
@@ -120,18 +123,25 @@ class runlength_decompress:
         self.image = cv2.cvtColor(image, cv2.COLOR_YCrCb2BGR)
 
     def decompress(self):
-        t = time.time()
-
         model = runlength_coding.decoder()
+        leng_array = len(self.symbols)
+        percent = 0
+        i = 0
         for symbol, length in zip(self.symbols, self.run_length):
-            model.decode(symbol, length)
+            if i * 100.0 / leng_array > percent:
+                percent += 1
+                sys.stdout.write("Processing:\t{} % \r".format(percent))
+                sys.stdout.flush()
 
+            model.decode(symbol, length)
+            i += 1
+        print('')
         self.array = model.get_array()
-        self.time = time.time() - t
         self.toimage()
 
     def write(self):
         cv2.imwrite(self.output_path, self.image)
+        self.time = time.time() - self.time
         print("Input: \'%s\' \tOutput: \'%s\' \tTime: %2.f(s)"%(self.input_path, self.output_path, self.time))
 
 def main(argv):

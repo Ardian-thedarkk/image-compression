@@ -84,12 +84,15 @@ class runlength_compress:
         t = time.time()
 
         model = runlength_coding.encoder()
-        #leng_array = len(self.array)
+        leng_array = len(self.array)
+        percent = 0
         for i, symbol in enumerate(self.array):
-            #sys.stdout.write("Processing:\t%d\t/\t%d\r"%(i+1, leng_array))
-            #sys.stdout.flush()
+            if i * 100.0 / leng_array > percent:
+                percent += 1
+                sys.stdout.write("Processing:\t{} % \r".format(percent))
+                sys.stdout.flush()
             model.encode(symbol)
-
+        print('')
         self.symbols    = model.get_symbols()
         self.run_length = model.get_run_length()
 
