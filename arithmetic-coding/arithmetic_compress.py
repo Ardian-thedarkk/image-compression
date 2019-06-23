@@ -33,7 +33,7 @@ class arithmetic_compress:
         self.freq = {}
         
         # time using for compressing
-        self.time = 0
+        self.time = time.time()
 
         self.read()
         self.toarray()
@@ -61,8 +61,7 @@ class arithmetic_compress:
         self.array = list(np.concatenate((Y, Cr, Cb), axis = 0))
 
     def compress(self, numbits):
-        # time
-        t = time.time()
+        
         # push eof into array
         self.array.append(256)
 
@@ -86,7 +85,6 @@ class arithmetic_compress:
         model.finish()
         print('')
         
-        self.time = time.time() - t
         self.get_total_bitout()
         
     def get_total_bitout(self):
@@ -150,6 +148,7 @@ class arithmetic_compress:
         # save byte array to output
         with open(self.output_path, 'wb') as f:
             pickle.dump(b, f)
+            self.time = time.time() - self.time
             print("Input: \'%s\'\tOutput: \'%s\'\tTime: %.2f(s)\tRatio: %.2f" %(self.image_path, self.output_path, self.time, self.ratio))
             
 
