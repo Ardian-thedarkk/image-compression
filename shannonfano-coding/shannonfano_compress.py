@@ -83,7 +83,7 @@ class shannonfano_compress:
                 sys.stdout.write("Processing:\t{} % \r".format(percent))
                 sys.stdout.flush()
             encoder.encode(symbol)
-
+        print('')
         encoder.finish()
         
         with open(self.string_path, "r") as f:
