@@ -153,8 +153,8 @@ class arithmetic_compress:
         with open(self.output_path, 'wb') as f:
             pickle.dump(b, f)
             self.time = time.time() - self.time
-            print("Input: \'%s\'\tOutput: \'%s\'\tTime: %.2f(s)\tRatio: %.2f" %(self.image_path, self.output_path, self.time, self.ratio))
-            
+            print("Input: \'%s\'\tOutput: \'%s\'\tBit Input: %d\tBit Output: %d\tRatio: %.2f\tTime: %.2f" %(self.image_path, self.output_path,self.numbits_input, self.numbits_output, self.ratio, self.time))
+
 
 def main(argv):
 
