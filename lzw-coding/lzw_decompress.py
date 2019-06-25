@@ -109,7 +109,7 @@ class lzw_decompress:
     def write(self):
         cv2.imwrite(self.output_path, self.image)
         self.time = time.time() - self.time
-        print("Input: \'%s\' \tOutput: \'%s\' \tTime: %2.f(s)"%(self.input_path, self.output_path, self.time))
+        print("Input: \'%s\' \tOutput: \'%s\' \tTime: %.2f(s)"%(self.input_path, self.output_path, self.time))
 
 
 def main(argv):
