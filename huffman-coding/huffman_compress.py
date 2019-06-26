@@ -97,11 +97,11 @@ class huffman_compress:
         percent = 0
         for i in range(0, leng, self.extended_size):
             encoder.encode(self.array[i: i + self.extended_size])
-            if i * 100.0 / leng > percent:
-                percent += 1
-                sys.stdout.write("Processing:\t{} % \r".format(percent))
-                sys.stdout.flush()
-        print('')
+            #if i * 100.0 / leng > percent:
+                #percent += 1
+                #sys.stdout.write("Processing:\t{} % \r".format(percent))
+                #sys.stdout.flush()
+        #print('')
         encoder.finish()
         
         with open(self.string_path, "r") as f:
@@ -157,7 +157,11 @@ class huffman_compress:
 
 
 def main(argv):
-    image_path, output_path, extended_size = argv
+    image_path, output_path = argv[:2]
+    if len(argv) == 2:
+        extended_size = 1
+    else:
+        extended_size = argv[2:]
 
     compressor = huffman_compress(image_path, output_path, extended_size)
     compressor.compress()
